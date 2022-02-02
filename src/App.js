@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
+import ShowDetails from './Pages/ShowDetails';
 import Starred from './Pages/Starred';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
 
         <Route path="/" element={<Home />} />
         <Route path="/starred" element={<Starred />} />
+        <Route path="/show/:id" element={ <ShowDetails />} />
         <Route path="*" element={ <NotFound />} />
 
       </Routes>
