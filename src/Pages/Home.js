@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ActorList from '../components/actor/ActorList';
+import ShowList from '../components/show/ShowList';
 import HomePageLayout from '../layouts/HomePageLayout';
 import { apiGet } from '../misc/config.js'
 
@@ -37,8 +39,8 @@ const Home = () => {
             return <div>No Resul Found!</div>
         } else if (results && results.length > 0) {
             return results[0].show
-                ? results.map((item) => <div key={item.show.id}>{item.show.name}</div>)
-                : results.map((item) => <div key={item.person.id}>{item.person.name}</div>)
+                ? <ShowList data={results} />
+                : <ActorList data={results} />
         } else {
             return null;
         }
