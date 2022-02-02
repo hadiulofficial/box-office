@@ -2,9 +2,14 @@ import React, { useReducer, useEffect } from 'react';
 import loadingImg from '../assets/images/loading.gif'
 import { useParams } from 'react-router-dom';
 import { apiGet } from '../misc/config';
+import ShowMainData from '../components/show/ShowMainData';
+import Details from '../components/show/Details';
+import Cast from '../components/show/Cast';
+import Season from '../components/show/Season';
+import { ShowPageWrapper, InfoBlock } from '../styles/ShsowDetails.styled';
 
 const reducer = (prevState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'FETCH_SUCCESS': {
             return {
                 showDetails: action.showDetails,
@@ -35,7 +40,7 @@ const initialState = {
 const ShowDetails = () => {
     const { id } = useParams()
 
-    const [{showDetails, isLoading, error}, dispatch] = useReducer(reducer, initialState)
+    const [{ showDetails, isLoading, error }, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
         let isMouted = true;
@@ -62,7 +67,7 @@ const ShowDetails = () => {
 
     }, [id]);
 
-    console.log('data: ',showDetails)
+    console.log('data: ', showDetails)
 
     if (isLoading) {
         return (
@@ -77,10 +82,35 @@ const ShowDetails = () => {
     }
 
     return (
-        <div>
-            <h1>Details</h1>
+        <ShowPageWrapper>
+            <ShowMainData
+                image={showDetails.image}
+                name={showDetails.name}
+                rating={showDetails.rating}
+                summary={showDetails.summary}
+                tags={showDetails.genres}
+            />
 
-        </div>
+            <InfoBlock>
+                <h2>Details</h2>
+                <Details 
+                    status={showDetails.status}
+                    network={showDetails.network}
+                    premiered={showDetails.premiered}
+                />
+            </InfoBlock>
+
+            <InfoBlock>
+                <h2>Seasons</h2>
+                <Season seasons={showDetails._embedded.seasons}  />
+            </InfoBlock>
+
+            <InfoBlock>
+                <h2>Cast</h2>
+                <Cast cast={showDetails._embedded.cast} />
+            </InfoBlock>
+
+        </ShowPageWrapper>
     );
 };
 
