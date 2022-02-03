@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import ShowCard from './ShowCard';
 import imgNotFound from '../../assets/images/notFound.png'
 import { FlexGrid } from '../../styles/styled';
+import { useShows } from '../../misc/customHook';
 
 const ShowList = ({ data }) => {
+    const [starredShows, dispatchStarred] = useShows();
+
+    const onStarClick = useCallback(
+        (showId, isStarred) => {
+            if (isStarred) {
+                dispatchStarred({ type: 'REMOVE', showId });
+            } else {
+                dispatchStarred({ type: 'ADD', showId });
+            }
+        },
+        [dispatchStarred]
+    );
+
     return (
         <FlexGrid>
-            {
-                data.map(({show}) => <ShowCard
-                    key={show.id}
-                    id={show.id}
-                    name={show.name}
-                    image={show.image ? show.image.medium : imgNotFound }
-                    summary={show.summary}
-                />)
-            }
+            {data.map(({ show }) => {
+                return (
+                    <ShowCard
+                        key={show.id}
+                        id={show.id}
+                        name={show.name}
+                        image={show.image ? show.image.medium : imgNotFound}
+                        summary={show.summary}
+                        onStarClick={onStarClick}
+                        isStarred={starredShows.includes(show.id)}
+                    />
+                );
+            })}
         </FlexGrid>
     );
 };

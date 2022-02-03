@@ -3,6 +3,11 @@ import ActorList from '../components/actor/ActorList';
 import ShowList from '../components/show/ShowList';
 import HomePageLayout from '../layouts/HomePageLayout';
 import { apiGet } from '../misc/config.js'
+import {
+    SearchInput,
+    RadioInputsWrapper,
+    SearchButtonWrapper,
+} from '../styles/Home.styled';
 
 const Home = () => {
     const [input, setInput] = useState('')
@@ -49,7 +54,7 @@ const Home = () => {
     return (
         <HomePageLayout>
 
-            <input
+            <SearchInput
                 type="text"
                 onChange={onInputChange}
                 value={input}
@@ -57,32 +62,40 @@ const Home = () => {
                 placeholder="Search what do you want!"
             />
 
-            <lebel htmlFor="shows-search">
-                Shows
-                <input
-                    type="radio"
-                    id="shows-search"
-                    value="shows"
-                    onChange={onRadioChange}
-                    checked={isShowsSearch}
-                />
-            </lebel>
+            <RadioInputsWrapper>
 
-            <lebel htmlFor="actors-search">
-                Actors
-                <input
-                    type="radio"
-                    value="people"
-                    id="actors-search"
-                    onChange={onRadioChange}
-                    checked={!isShowsSearch}
-                />
-            </lebel>
+                <lebel htmlFor="shows-search">
+                    Shows
+                    <input
+                        type="radio"
+                        id="shows-search"
+                        value="shows"
+                        onChange={onRadioChange}
+                        checked={isShowsSearch}
+                    />
+                </lebel>
 
-            <button
-                type="button"
-                onClick={onSearch}
-            >Search</button>
+                <lebel htmlFor="actors-search">
+                    Actors
+                    <input
+                        type="radio"
+                        value="people"
+                        id="actors-search"
+                        onChange={onRadioChange}
+                        checked={!isShowsSearch}
+                    />
+                </lebel>
+
+            </RadioInputsWrapper>
+
+            <SearchButtonWrapper>
+                <button
+                    type="button"
+                    onClick={onSearch}
+                >Search
+                </button>
+            </SearchButtonWrapper>
+
             {renderResults()}
 
         </HomePageLayout>
