@@ -55,7 +55,7 @@ export const TagList = styled.div`
   span {
     margin: 6px;
     margin-bottom: 0;
-    color: blue;
+    color: #E50914;
     background-color: #d0c9ff;
     padding: 3px 13px;
     border-radius: 20px;

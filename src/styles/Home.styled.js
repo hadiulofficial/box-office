@@ -32,7 +32,7 @@ export const SearchButtonWrapper = styled.div`
   margin-bottom: 35px;
   button {
     color: #fff;
-    background-color: blue;
+    background-color: #E50914;
     margin: auto;
     padding: 10px 50px;
     font-size: 15px;

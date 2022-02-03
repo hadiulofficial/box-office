@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Old Standard TT', serif;
+  background-color: #141414;
+  color: aliceblue;
   font-size: 18px;
   margin: 0;
   padding-top: 40px;
