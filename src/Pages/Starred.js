@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import loadingImg from '../assets/images/loading.gif'
 import HomePageLayout from '../layouts/HomePageLayout';
 import { useShows } from '../misc/customHook';
 import { apiGet } from '../misc/config'
@@ -34,7 +34,12 @@ const Starred = () => {
 
     return (
         <HomePageLayout>
-            {isLoading && <div>Shows are still loading</div>}
+            {
+                isLoading &&
+                <div className="loading">
+                    <img src={loadingImg} alt="loading.." />
+                </div>
+            }
             {error && <div>Error occured: {error}</div>}
             {!isLoading && !shows && <div>No shows were added</div>}
             {!isLoading && !error && shows && <ShowList data={shows} />}
